@@ -32,8 +32,10 @@ file_not_zip = []
 with open(file_index) as idx:
     file_list = idx.readlines()
 
-# proces all files in the file index
+# process all files in the file index
+processed_files = 0
 for f in file_list:
+    processed_files += 1
     fname = f.rstrip()
     # existence test
     if (not os.path.isfile(fname)):
@@ -49,6 +51,8 @@ for f in file_list:
         # all good zip files will reach here
         else:
             file_good.append(fname)
+    if (processed_files % 100 == 0):
+        print("Tested" , processed_files , "files")
 
 # report statistics
 print("FILE COUNT:", len(file_list))
